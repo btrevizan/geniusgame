@@ -16,29 +16,24 @@ public class GameView extends Application {
     private Button playButton;
     private Button gameButton, rankingButton, exitButton;
     static final int NUMBER_OF_BUTTONS = 4;
-    
+
     private ColoredButton[] coloredButtons;
-    private String playerName;
     private int difficulty;
+    private String playerName;
     private double volume;
 
     public GameView(){
-        this.volume = 1.0;
         this.coloredButtons = new ColoredButton[NUMBER_OF_BUTTONS];
     }
 
-    private double getVolume(){ return this.volume; }
+    private int getDifficulty(){ return this.difficulty; }
 
-    public void setVolume(double x){
-        if(x > 1.0)
-            x = 1.0;
-        else if(x < 0)
-            x = 0;
+    public void setDifficulty(int dif){ this.difficulty = dif; }
 
-        this.volume = x;
-    }
+    public ColoredButton getColoredButton(int i) { return coloredButtons[i]; }
 
     public static void main(String[] args){ launch(args); }
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -47,16 +42,12 @@ public class GameView extends Application {
         final int WIDTH = 800;
         final int HEIGHT = 800;
 
-        String playerName;
-        String difficulty;
-
         window.setTitle("Genius Game");
 
         gameButton = new Button("New Game");
         gameButton.setOnAction(e -> window.setScene(askPlayerInfo));
 
         rankingButton = new Button("Ranking");
-
 
         exitButton = new Button("Exit");
         exitButton.setOnAction(e -> this.closeProgram());
@@ -73,8 +64,8 @@ public class GameView extends Application {
         dropdown.setValue("easy");
         playButton = new Button("Play");
         playButton.setOnAction(e -> {
-            this.getChoice(nameInput.getText(), dropdown.getValue());
-            this.newGame();
+            this.setPlayerData(nameInput.getText(), dropdown.getValue());
+            this.listener.startGame();
         });
 
         coloredButtons[0] = new ColoredButton("red", "http://www.wavlist.com/soundfx/012/owl-4.wav", e -> this.sendClickedButton(0));
@@ -96,13 +87,14 @@ public class GameView extends Application {
         game = new Scene(gameLayout, WIDTH, HEIGHT);
 
         window.setScene(menu);
+
+        this.addGameListener(); // links to a Controller, which links to Model which links to this view -> M-V-C
+
         window.show();
 
     }
 
-    private void newGame(){ this.addGameListener(); }
-
-    public void showNewSequence(ArrayList<Integer> sequence){
+    public void showNewSequence(ArrayList<Integer> sequence, double volume){
         System.out.print("New Sequence: ");
         System.out.println(sequence.toString()); //todo: make coloredButtons blink
         for(Integer i : sequence){
@@ -111,7 +103,7 @@ public class GameView extends Application {
             }catch(java.lang.InterruptedException e){
                 System.out.println(e);
             }
-            this.showClickedButton(i);
+            this.showClickedButton(i, volume);
         }
     }
 
@@ -127,51 +119,26 @@ public class GameView extends Application {
     private void addGameListener(){ this.listener = new GameController(this); }
 
     private void closeProgram() {
-        System.out.println("Call function that check if needs to save player data (top 10)");
+        this.listener.closeGame();
         window.close();
     }
 
-    private boolean isValidName(String inputName) { return true; }// inputName.matches("[A-Za-z0-9]+"); }
-
-    private void getChoice(String playerName, String dif) {
-        if (this.isValidName(playerName)) {
-            this.setPlayerName(playerName);
-            this.setDifficulty(dif);
-            window.setScene(game);
-        } else
-            System.out.println("invalid name"); //todo pop up
-
-    }
-
-    public String getPlayerName() { return this.playerName; }
-
-    private void setPlayerName(String name) { this.playerName = name; }
-
-    public int getDifficulty() { return this.difficulty; }
-
-    private void setDifficulty(String dif){
-        switch (dif){
-            case "easy": this.difficulty = 1;
-            break;
-            case "medium": this.difficulty = 2;
-            break;
-            case "hard": this.difficulty = 3;
-            break;
-            default: this.difficulty = 2;
-        }
+    private void setPlayerData(String playerName, String dif) {
+        this.listener.setPlayerName(playerName);
+        this.listener.setDifficulty(dif);
+        window.setScene(game);
     }
 
     private int getTimeSpan(){
-        return 1000/this.difficulty;
+        return 1000/this.getDifficulty();
     }
 
     private void sendClickedButton(Integer cb) {
-        this.showClickedButton(cb);
         this.listener.pushAction(cb);
     }
 
-    private void showClickedButton(int buttonIndex){
-        this.coloredButtons[buttonIndex].onClicked(this.getVolume());
+    public void showClickedButton(int buttonIndex, double volume){
+        this.coloredButtons[buttonIndex].onClicked(volume);
         //this.coloredButton[buttonIndex].blink();
     }
 }

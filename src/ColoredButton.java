@@ -16,4 +16,8 @@ public class ColoredButton extends Button {
         this.clickSound.play(volume);
         // make button shine
     }
+
+    public void setClickSound(String soundURI) {
+        this.clickSound = new AudioClip(soundURI);
+    }
 }
