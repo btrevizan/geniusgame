@@ -12,7 +12,7 @@ public class ColoredButton extends Button {
         this.setOnAction(handler);
     }
 
-    public void onClicked(double volume){
+    public void onClick(double volume){
         this.clickSound.play(volume);
         // make button shine
     }

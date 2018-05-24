@@ -23,7 +23,7 @@ public class GameController implements IGameListener{
     }
 
     @Override
-    public void setSoundFX(Integer buttonNumber, String soundURI) {
+    public void setSoundFX(int buttonNumber, String soundURI) {
         this.model.setSoundFX(buttonNumber, soundURI);
     }
 

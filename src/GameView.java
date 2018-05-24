@@ -34,6 +34,9 @@ public class GameView extends Application {
 
     public static void main(String[] args){ launch(args); }
 
+    public void setVolume(double volume){ this.volume = volume; }
+
+    private double getVolume(){ return this.volume; }
 
     @Override
     public void start(Stage primaryStage) {
@@ -94,7 +97,7 @@ public class GameView extends Application {
 
     }
 
-    public void showNewSequence(ArrayList<Integer> sequence, double volume){
+    public void showNewSequence(ArrayList<Integer> sequence){
         System.out.print("New Sequence: ");
         System.out.println(sequence.toString()); //todo: make coloredButtons blink
         for(Integer i : sequence){
@@ -103,7 +106,7 @@ public class GameView extends Application {
             }catch(java.lang.InterruptedException e){
                 System.out.println(e);
             }
-            this.showClickedButton(i, volume);
+            this.showClickedButton(i);
         }
     }
 
@@ -137,8 +140,8 @@ public class GameView extends Application {
         this.listener.pushAction(cb);
     }
 
-    public void showClickedButton(int buttonIndex, double volume){
-        this.coloredButtons[buttonIndex].onClicked(volume);
+    public void showClickedButton(int buttonIndex){
+        this.coloredButtons[buttonIndex].onClick(this.getVolume());
         //this.coloredButton[buttonIndex].blink();
     }
 }

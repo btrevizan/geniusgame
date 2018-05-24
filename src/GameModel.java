@@ -10,7 +10,6 @@ public class GameModel {
     private int difficulty;
     private String playerName;
     private GameView view;
-    private double volume;
 
     // function for printing and such, will be eliminated later
     private void test(){
@@ -34,7 +33,7 @@ public class GameModel {
     public void startGame(){
         this.pushRandomRecord();
         this.view.setDifficulty(this.getDifficulty());
-        this.view.showNewSequence(this.getSequence(), this.getVolume());
+        this.view.showNewSequence(this.getSequence());
     }
 
     public void setPlayerName(String playerName){ this.playerName = playerName; }
@@ -69,8 +68,6 @@ public class GameModel {
 
     private void addPoints(int x){ this.points += x; }
 
-    private double getVolume(){ return this.volume; }
-
     public void setSoundFX(Integer buttonNumber, String soundURI) {
         this.view.getColoredButton(buttonNumber).setClickSound(soundURI);
     }
@@ -79,11 +76,10 @@ public class GameModel {
         if(x > 1.0)
             x = 1.0;
         else if(x < 0)
-            x = 0;
+            x = 0.0;
 
-        this.volume = x;
+        this.view.setVolume(x);
     }
-
 
     private void pushRecord(Integer n){
         sequence.add(n);
@@ -110,7 +106,7 @@ public class GameModel {
                 this.setIndex(0);
                 this.pushRandomRecord();
                 this.addPoints(this.getDifficulty());
-                this.view.showNewSequence(this.getSequence(), this.getVolume());
+                this.view.showNewSequence(this.getSequence());
                 this.view.showNewPoints(this.getPoints());
             }
 
@@ -119,7 +115,7 @@ public class GameModel {
     }
 
     public void clickedFeedback(Integer clickedButton){
-        this.view.showClickedButton(clickedButton, this.getVolume());
+        this.view.showClickedButton(clickedButton);
     }
 
     private void gameOver(){
