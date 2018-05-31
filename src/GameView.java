@@ -6,9 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class GameView extends Application {
+public class GameView extends Application implements IGamePresenter {
 
     private Stage window;
     private IGameListener listener;
@@ -21,6 +21,7 @@ public class GameView extends Application {
     private int difficulty;
     private String playerName;
     private double volume;
+    private int timeSpan;
 
     public GameView(){
         this.coloredButtons = new ColoredButton[NUMBER_OF_BUTTONS];
@@ -28,9 +29,13 @@ public class GameView extends Application {
 
     private int getDifficulty(){ return this.difficulty; }
 
+    @Override
     public void setDifficulty(int dif){ this.difficulty = dif; }
 
-    public ColoredButton getColoredButton(int i) { return coloredButtons[i]; }
+    @Override
+    public ColoredButton getColoredButton(Integer buttonNumber) {
+        return coloredButtons[buttonNumber];
+    }
 
     public static void main(String[] args){ launch(args); }
 
@@ -67,14 +72,17 @@ public class GameView extends Application {
         dropdown.setValue("easy");
         playButton = new Button("Play");
         playButton.setOnAction(e -> {
-            this.setPlayerData(nameInput.getText(), dropdown.getValue());
+            this.listener.setPlayerName(nameInput.getText());
+            this.listener.setDifficulty(dropdown.getValue());
+
+            window.setScene(game);
             this.listener.startGame();
         });
 
-        coloredButtons[0] = new ColoredButton("red", "http://www.wavlist.com/soundfx/012/owl-4.wav", e -> this.sendClickedButton(0));
-        coloredButtons[1] = new ColoredButton("green", "http://www.wavlist.com/soundfx/011/duck-quack5.wav", e -> this.sendClickedButton(1));
-        coloredButtons[2] = new ColoredButton("blue", "http://www.wavlist.com/soundfx/003/cow-moo2.wav", e -> this.sendClickedButton(2));
-        coloredButtons[3] = new ColoredButton("yellow", "http://www.wavlist.com/soundfx/009/chicken-3.wav", e -> this.sendClickedButton(3));
+        coloredButtons[0] = new ColoredButton("red", "http://www.wavlist.com/soundfx/012/owl-4.wav", e -> this.listener.pushAction(0));
+        coloredButtons[1] = new ColoredButton("green", "http://www.wavlist.com/soundfx/011/duck-quack5.wav", e -> this.listener.pushAction(1));
+        coloredButtons[2] = new ColoredButton("blue", "http://www.wavlist.com/soundfx/003/cow-moo2.wav", e -> this.listener.pushAction(2));
+        coloredButtons[3] = new ColoredButton("yellow", "http://www.wavlist.com/soundfx/009/chicken-3.wav", e -> this.listener.pushAction(3));
 
 
         VBox menuLayout = new VBox(20);
@@ -97,7 +105,8 @@ public class GameView extends Application {
 
     }
 
-    public void showNewSequence(ArrayList<Integer> sequence){
+    @Override
+    public void showNewSequence(List<Integer> sequence){
         System.out.print("New Sequence: ");
         System.out.println(sequence.toString()); //todo: make coloredButtons blink
         for(Integer i : sequence){
@@ -110,10 +119,12 @@ public class GameView extends Application {
         }
     }
 
-    public void showNewPoints(Integer points){
+    @Override
+    public void showNewPoints(int points) {
         System.out.println(points); // refresh point count
     }
 
+    @Override
     public void gameOver(){
         System.out.println(" Game Over ");
         window.setScene(menu);
@@ -126,21 +137,14 @@ public class GameView extends Application {
         window.close();
     }
 
-    private void setPlayerData(String playerName, String dif) {
-        this.listener.setPlayerName(playerName);
-        this.listener.setDifficulty(dif);
-        window.setScene(game);
-    }
+    public void setTimeSpan(int ts){ this.timeSpan = ts; }
 
     private int getTimeSpan(){
-        return 1000/this.getDifficulty();
+        return this.timeSpan;
     }
 
-    private void sendClickedButton(Integer cb) {
-        this.listener.pushAction(cb);
-    }
-
-    public void showClickedButton(int buttonIndex){
+    @Override
+    public void showClickedButton(Integer buttonIndex){
         this.coloredButtons[buttonIndex].onClick(this.getVolume());
         //this.coloredButton[buttonIndex].blink();
     }

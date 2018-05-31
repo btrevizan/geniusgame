@@ -1,20 +1,15 @@
 public class GameController implements IGameListener{
 
-    private GameModel model;
+    private IGameLogic model;
 
-    public GameController(GameView gv){
-        this.model = new GameModel(gv);
+    public GameController(IGamePresenter gp){
+        this.model = new GameModel(gp);
     }
-
-    private void sendTry(Integer theTry){
-        this.model.checkNewTry(theTry);
-    }
-
 
     @Override
     public void pushAction(Integer i) {
         this.model.clickedFeedback(i);
-        this.sendTry(i);
+        this.model.checkNewTry(i);
     }
 
     @Override
@@ -23,7 +18,7 @@ public class GameController implements IGameListener{
     }
 
     @Override
-    public void setSoundFX(int buttonNumber, String soundURI) {
+    public void setSoundFX(Integer buttonNumber, String soundURI) {
         this.model.setSoundFX(buttonNumber, soundURI);
     }
 

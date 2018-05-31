@@ -1,7 +1,12 @@
-public interface IGameListener {
-    void pushAction(Integer i);
+interface IGameLogic {
 
-    void changeVolume(double newVolume);
+    void checkNewTry(Integer theTry);
+
+    void addNextElement();
+
+    void clickedFeedback(Integer i);
+
+    void setVolume(double newVolume);
 
     void setSoundFX(Integer buttonNumber, String soundURI);
 
