@@ -36,7 +36,7 @@ public class Configuration{
     }
 
     public void mute(){
-        this.volume = Default.MUTE;
+        this.setVolume(Default.MUTE);
     }
 
     public boolean addColor(Color color){
