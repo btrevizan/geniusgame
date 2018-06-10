@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Game{
 
     private Ranking ranking;
@@ -8,16 +10,16 @@ public class Game{
         this.configuration = new Configuration();
     }
 
-    public Match newMatch(){
-        return new Match(this, this.newPlayer());
+    public Match newMatch(String playerName){
+        return new Match(this, this.newPlayer(playerName));
     }
 
-    public double getDifficulty(){
+    public int getDifficulty(){
         return this.configuration.getDifficulty();
     }
 
-    public Ranking getRanking(){
-        return this.ranking.clone();
+    public Ranking getRanking() throws CloneNotSupportedException{
+        return (Ranking)this.ranking.clone();
     }
 
     public double getVolume(){
@@ -41,7 +43,7 @@ public class Game{
     }
 
     public void setDifficultyMedium(){
-        this.changeDifficulty(Difficulty.MEIDUM);
+        this.changeDifficulty(Difficulty.MEDIUM);
     }
 
     public void setDifficultyHard(){
@@ -52,7 +54,7 @@ public class Game{
     }
 
     private Player newPlayer(String name){
-        return Player(name);
+        return new Player(name);
     }
 
 }

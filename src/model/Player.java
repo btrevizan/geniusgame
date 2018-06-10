@@ -1,4 +1,4 @@
-public class Player{
+public class Player implements Cloneable{
 
     private String name;
     private int points;
@@ -6,6 +6,11 @@ public class Player{
     public Player(String name){
         this.setName(name);
         this.points = 0;
+    }
+
+    public Player(String name, int points){
+        this.setName(name);
+        this.points = points;
     }
 
     public void setName(String name){
@@ -26,9 +31,13 @@ public class Player{
 
     public String toString(){
         String name = this.getName();
-        String points = this.getPoints().toString()
+        String points = Integer.toString(this.getPoints());
 
         return name + Default.SEPARATOR + points + "\n";
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

@@ -1,6 +1,6 @@
 import javafx.scene.media.AudioClip;
 
-public class Color{
+public class Color implements Cloneable{
 
     private String color;
     private AudioClip sound;
@@ -19,7 +19,7 @@ public class Color{
     }
 
     public AudioClip getSound(){
-        return AudioClip.clone();
+        return this.sound;
     }
 
     public void setSound(String soundURI){
@@ -30,5 +30,10 @@ public class Color{
         // make it shine
         this.sound.play(volume);
         // make it normal again
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

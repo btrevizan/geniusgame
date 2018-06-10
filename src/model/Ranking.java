@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
 
-public class Ranking{
+public class Ranking implements Cloneable{
 
-    private class PointComparator implements Comparator{
+    private class PointComparator implements Comparator<Player>{
 
         @Override
         public int compare(Player p1, Player p2){
@@ -18,10 +18,10 @@ public class Ranking{
     }
 
     private ArrayList<Player> rank;
-    private final String RANKPATH = "assets/rank.txt";
+    private final String RANKPATH = "../assets/rank.txt";
 
     public Ranking(){
-        this.rank = ArrayList<Player>();
+        this.rank = new ArrayList<Player>();
         this.load();
     }
 
@@ -30,7 +30,7 @@ public class Ranking{
 
         if(this.rank.size() == Default.RANK_SIZE){
             final int playerPoints = player.getPoints();
-            final int lastPlayerPoints = this.rank.get(lastIndex);
+            final int lastPlayerPoints = this.rank.get(lastIndex).getPoints();
 
             if (playerPoints < lastPlayerPoints)
                 return false;
@@ -45,8 +45,8 @@ public class Ranking{
         return true;
     }
 
-    public Iterator<Player> getRank(){
-        final Iterable<Player> rank = this.rank.iterator();
+    public Iterator getRank(){
+        final Iterator<Player> rank = this.rank.iterator();
 
         return new Iterator<Player>(){
 
@@ -61,7 +61,7 @@ public class Ranking{
             public void remove(){
                 throw new UnsupportedOperationException();
             }
-        }
+        };
     }
 
     private int getLastIndex(){
@@ -79,32 +79,47 @@ public class Ranking{
 
     private void load(){
         Path filepath = Paths.get(this.RANKPATH);
-        BufferedReader file = Files.newBufferedReader(filepath, Charset.defaultCharset());
 
-        String line = file.readLine();
+        try{
+            BufferedReader file = Files.newBufferedReader(filepath, Charset.defaultCharset());
 
-        while(line != null){
-            String[] info = line.split(Default.SEPARATOR);
+            String line = file.readLine();
 
-            String name = info[0];
-            int points = Integer.parseInt(info[1]);
+            while(line != null){
+                String[] info = line.split(Default.SEPARATOR);
 
-            Player player = new Player(info[0], points);
-            this.rank.add(player);
+                String name = info[0];
+                int points = Integer.parseInt(info[1]);
 
-            line = file.readLine();
+                Player player = new Player(info[0], points);
+                this.rank.add(player);
+
+                line = file.readLine();
+            }
+
+            file.close();
+        } catch(IOException e) {
+            System.err.format("Erro de I/O: %s%n", e);
         }
-
-        file.close();
     }
 
     private void save(){
-        PrintWriter file = PrintWriter(this.RANKPATH, Charset.defaultCharset());
+        try{
+            PrintWriter file = new PrintWriter(this.RANKPATH);
 
-        for(Player player: this.rank){
-            file.write(player.toString());
+            for(Player player: this.rank){
+                file.write(player.toString());
+            }
+
+            file.close();
+
+        } catch(FileNotFoundException e) {
+            System.err.format("FileNotFound: %s%n", e);
         }
+    }
 
-        file.close();
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

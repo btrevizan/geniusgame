@@ -1,9 +1,9 @@
-import java.util.Arryalist;
+import java.util.ArrayList;
 
 public class Configuration{
 
     private double volume;
-    private double difficulty;
+    private int difficulty;
     private ArrayList<Color> colors;
 
     public Configuration(){
@@ -12,11 +12,11 @@ public class Configuration{
         this.colors = new ArrayList<Color>();
     }
 
-    public double getDifficulty(){
+    public int getDifficulty(){
         return this.difficulty;
     }
 
-    public void setDifficulty(double difficulty){
+    public void setDifficulty(int difficulty){
         this.difficulty = difficulty;
     }
 
@@ -25,14 +25,14 @@ public class Configuration{
     }
 
     public void setVolume(double volume){
-        if(volume < Default.MUTE and volume > Default.VOLUME_HIGH)
+        if(volume < Default.MUTE && volume > Default.VOLUME_HIGH)
             return;
 
         this.volume = volume;
     }
 
     public ArrayList<Color> getColors(){
-        return this.colors.clone();
+        return (ArrayList<Color>)this.colors.clone();
     }
 
     public void mute(){

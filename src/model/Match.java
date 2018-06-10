@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Match{
 
     private Game game;
@@ -15,8 +17,12 @@ public class Match{
         this.resetTryIndex();
     }
 
-    public Player getPlayer(){
-        return this.player.clone();
+    public String getPlayerName(){
+        return this.player.getName();
+    }
+
+    public int getPlayerPoints(){
+        return this.player.getPoints();
     }
 
     public void nextRound(){
@@ -26,7 +32,7 @@ public class Match{
     }
 
     public boolean check(int button){
-        if(!this.is_correc(button))
+        if(!this.is_correct(button))
             return false; // Game over
 
         this.incTryIndex();
@@ -35,7 +41,7 @@ public class Match{
 
     private void play(){
         double volume = this.game.getVolume();
-        double timespan = this.game.getDifficulty();
+        int timespan = this.game.getDifficulty();
         ArrayList<Color> colors = this.game.getColors();
 
         this.sequence.play(colors, volume, timespan);
@@ -46,7 +52,7 @@ public class Match{
     }
 
     private boolean is_correct(int button){
-        return this.sequence.get(this.tryIndex) == button;
+        return this.sequence.getSequence().get(this.tryIndex) == button;
     }
 
     private void resetTryIndex(){
