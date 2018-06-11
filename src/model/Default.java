@@ -1,3 +1,6 @@
+package model;
+
+
 public class Default{
 
     public static final double MUTE = 0;

@@ -1,3 +1,6 @@
+package model;
+
+
 public class Player implements Cloneable{
 
     private String name;

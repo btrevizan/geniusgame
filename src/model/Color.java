@@ -1,4 +1,7 @@
+package model;
+
 import javafx.scene.media.AudioClip;
+
 
 public class Color implements Cloneable{
 

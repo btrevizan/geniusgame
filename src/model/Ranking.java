@@ -1,3 +1,5 @@
+package model;
+
 import java.io.*;
 import java.nio.file.*;
 import java.nio.charset.*;
@@ -6,6 +8,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
+
 
 public class Ranking implements Cloneable{
 

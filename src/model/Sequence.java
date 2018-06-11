@@ -1,6 +1,9 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.lang.Thread;
+
 
 public class Sequence{
 

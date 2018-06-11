@@ -1,3 +1,6 @@
+package model;
+
+
 public class Difficulty{
 
     // Delay in miliseconds
