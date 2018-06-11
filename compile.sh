@@ -1,1 +1,1 @@
-javac src/*/*.java src/Main.java -d out/ -cp src/Main.java
+rm -R out/* | javac src/*/*.java -d out/ -cp src/Main.java
