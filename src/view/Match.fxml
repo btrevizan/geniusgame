@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="17.0" layoutY="35.0" prefHeight="41.0" prefWidth="600.0" spacing="30.0" AnchorPane.bottomAnchor="359.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player name" textAlignment="CENTER">
+               <font>
+                  <Font name="Helvetica Neue" size="16.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Level: 01" textAlignment="CENTER">
+               <font>
+                  <Font name="Helvetica Neue" size="16.0" />
+               </font>
+            </Text>
+         </children>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <VBox layoutX="170.0" layoutY="96.0" prefHeight="260.0" prefWidth="260.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="96.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Arc fill="#09569e" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="90.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc fill="#c30d0d" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Arc fill="#d3ca17" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="180.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc fill="#2fc30e" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="270.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
