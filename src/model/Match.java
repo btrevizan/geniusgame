@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Match{
 
     private Game game;
-    private int tryIndex;
     private Player player;
     private Sequence sequence;
 
@@ -16,8 +15,6 @@ public class Match{
 
         int colorsSize = this.game.getColors().size();
         this.sequence = new Sequence(colorsSize);
-
-        this.resetTryIndex();
     }
 
     public String getPlayerName(){
@@ -29,17 +26,21 @@ public class Match{
     }
 
     public void nextRound(){
-        this.resetTryIndex();
+        this.sequence.resetIndex();
         this.sequence.push();
         this.play();
     }
 
     public boolean check(int button){
-        if(!this.is_correct(button))
-            return false; // Game over
+        if(!this.sequence.equals(button))
+            return false;
 
-        this.incTryIndex();
+        this.sequence.incIndex();
         return true;
+    }
+
+    public void gameOver(){
+        // ?
     }
 
     private void play(){
@@ -48,21 +49,5 @@ public class Match{
         ArrayList<Color> colors = this.game.getColors();
 
         this.sequence.play(colors, volume, timespan);
-    }
-
-    public void gameOver(){
-        // ?
-    }
-
-    private boolean is_correct(int button){
-        return this.sequence.getSequence().get(this.tryIndex) == button;
-    }
-
-    private void resetTryIndex(){
-        this.tryIndex = 0;
-    }
-
-    private void incTryIndex(){
-        this.tryIndex = this.tryIndex + 1;
     }
 }
