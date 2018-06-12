@@ -11,4 +11,6 @@ public class Default{
 
     public static final int RANK_SIZE = 10;
     public static final String SEPARATOR = ",";
+
+    public static final int RANGE_LIMIT = 4;
 }
