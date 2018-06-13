@@ -1,35 +1,39 @@
 package model;
 
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 
 public class Player implements Cloneable{
 
-    private String name;
-    private int points;
+    private StringProperty name;
+    private IntegerProperty points;
 
     public Player(String name){
-        this.setName(name);
-        this.points = 0;
+        Player(name, 0);
     }
 
     public Player(String name, int points){
-        this.setName(name);
-        this.points = points;
+        this.name = new SimpleStringProperty(name);
+        this.points = new SimpleIntegerProperty(points);
     }
 
     public void setName(String name){
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getName(){
-        return this.name;
+        return this.name.get();
     }
 
     public void addPoints(int x){
-        this.points = this.points + x;
+        this.points.set(this.points + x);
     }
 
     public int getPoints(){
-        return this.points;
+        return this.points.get();
     }
 
     public String toString(){

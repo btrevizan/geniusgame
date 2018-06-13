@@ -5,11 +5,9 @@ import java.util.ArrayList;
 
 public class Game{
 
-    private Ranking ranking;
     private Configuration configuration;
 
     public Game(){
-        this.ranking = new Ranking();
         this.configuration = new Configuration();
     }
 
@@ -21,8 +19,8 @@ public class Game{
         return this.configuration.getDifficulty();
     }
 
-    public Ranking getRanking() throws CloneNotSupportedException{
-        return (Ranking)this.ranking.clone();
+    public Ranking getRanking(){
+        return new Ranking();
     }
 
     public double getVolume(){
