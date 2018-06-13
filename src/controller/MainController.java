@@ -29,36 +29,38 @@ public class MainController extends Application {
      * Initializes the root layout.
      */
     public void initRootLayout() {
-        try {
-            // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/MainView.fxml"));
-            rootLayout = (BorderPane) loader.load();
+        return;
+        // try {
+        //     // Load root layout from fxml file.
+        //     FXMLLoader loader = new FXMLLoader();
+        //     loader.setLocation(MainApp.class.getResource("view/MainView.fxml"));
+        //     rootLayout = (BorderPane) loader.load();
 
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //     // Show the scene containing the root layout.
+        //     Scene scene = new Scene(rootLayout);
+        //     primaryStage.setScene(scene);
+        //     primaryStage.show();
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 
     /**
      * Shows the person overview inside the root layout.
      */
     public void showPersonOverview() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
-            AnchorPane personOverview = (AnchorPane) loader.load();
+        return;
+        // try {
+        //     // Load person overview.
+        //     FXMLLoader loader = new FXMLLoader();
+        //     loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
+        //     AnchorPane personOverview = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(personOverview);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //     // Set person overview into the center of root layout.
+        //     rootLayout.setCenter(personOverview);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 
     /**

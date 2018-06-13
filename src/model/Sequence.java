@@ -13,7 +13,7 @@ public class Sequence{
     private int index;
 
     public Sequence(){
-        this.Sequence(Default.RANGE_LIMIT)
+        this(Default.RANGE_LIMIT);
     }
 
     public Sequence(int rangeLimit){
@@ -45,7 +45,7 @@ public class Sequence{
         this.sequence.add(next);
     }
 
-    public void play(ArrayList<Color> colors, double volume, int timespan){
+    public void play(ArrayList<SoundedColor> colors, double volume, int timespan){
         for(int index: this.sequence){
             colors.get(index).play(volume);
             this.wait(timespan);

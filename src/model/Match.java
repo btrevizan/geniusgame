@@ -46,7 +46,7 @@ public class Match{
     private void play(){
         double volume = this.game.getVolume();
         int timespan = this.game.getDifficulty();
-        ArrayList<Color> colors = this.game.getColors();
+        ArrayList<SoundedColor> colors = this.game.getColors();
 
         this.sequence.play(colors, volume, timespan);
     }

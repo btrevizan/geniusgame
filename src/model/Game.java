@@ -27,7 +27,7 @@ public class Game{
         return this.configuration.getVolume();
     }
 
-    public ArrayList<Color> getColors(){
+    public ArrayList<SoundedColor> getColors(){
         return this.configuration.getColors();
     }
 

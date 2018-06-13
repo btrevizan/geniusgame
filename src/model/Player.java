@@ -6,13 +6,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
-public class Player implements Cloneable{
+public class Player implements Cloneable, IInstanceFileBased{
 
     private StringProperty name;
     private IntegerProperty points;
 
     public Player(String name){
-        Player(name, 0);
+        this(name, 0);
     }
 
     public Player(String name, int points){
@@ -29,11 +29,18 @@ public class Player implements Cloneable{
     }
 
     public void addPoints(int x){
-        this.points.set(this.points + x);
+        this.points.add(x);
     }
 
     public int getPoints(){
         return this.points.get();
+    }
+
+    public static Object createInstance(String[] args){
+        String name = args[0];
+        int points = Integer.parseInt(args[1]);
+
+        return new Player(name, points);
     }
 
     public String toString(){

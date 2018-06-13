@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.Collections;
 
 
-public class Ranking implements Cloneable{
+public class Ranking implements Cloneable, IFileBased{
 
     private class PointComparator implements Comparator<Player>{
 
@@ -48,6 +48,10 @@ public class Ranking implements Cloneable{
         return true;
     }
 
+    public void setRank(ArrayList<Player> rank){
+        this.rank = (ArrayList<Player>)rank;
+    }
+
     public Iterator getRank(){
         final Iterator<Player> rank = this.rank.iterator();
 
@@ -80,45 +84,14 @@ public class Ranking implements Cloneable{
         Collections.sort(this.rank, new PointComparator());
     }
 
-    private void load(){
-        Path filepath = Paths.get(this.RANKPATH);
-
-        try{
-            BufferedReader file = Files.newBufferedReader(filepath, Charset.defaultCharset());
-
-            String line = file.readLine();
-
-            while(line != null){
-                String[] info = line.split(Default.SEPARATOR);
-
-                String name = info[0];
-                int points = Integer.parseInt(info[1]);
-
-                Player player = new Player(info[0], points);
-                this.rank.add(player);
-
-                line = file.readLine();
-            }
-
-            file.close();
-        } catch(IOException e) {
-            System.err.format("Erro de I/O: %s%n", e);
-        }
+    public void load(){
+        AssetFile file = new AssetFile(this.RANKPATH);
+        this.setRank((ArrayList<Player>)file.load(Player.class));
     }
 
-    private void save(){
-        try{
-            PrintWriter file = new PrintWriter(this.RANKPATH);
-
-            for(Player player: this.rank){
-                file.write(player.toString());
-            }
-
-            file.close();
-
-        } catch(FileNotFoundException e) {
-            System.err.format("FileNotFound: %s%n", e);
-        }
+    public void save(){
+        AssetFile file = new AssetFile(this.RANKPATH);
+        file.save(this.rank);
     }
 
     @Override
