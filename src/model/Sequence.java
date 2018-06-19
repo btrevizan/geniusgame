@@ -61,6 +61,30 @@ public class Sequence{
         this.sequence.add(next);
     }
 
+
+    public boolean checkTry(Interger theTry){
+    	//aqui tem que mudar a comparação
+        isEqual =  this.getFromIndex();
+        
+        if(isEqual){
+        	this.sequence.incIndex();
+        	if(this.sequence.index == this.sequence.size()){
+                this.push();
+                this.resetIndex();
+        	}        	
+        	return true;        	
+        }
+        return false;
+    }
+
+    /**
+     * Generates the new int to be added in the sequnce.
+     * @return a random number between the range limit.
+     */
+    private int nextInt(){
+        return this.random.nextInt(this.rangeLimit);
+    }
+    
     /**
      * Plays the button that is indicated by index.
      * @param colors list of colors conected to their sounds
@@ -72,25 +96,6 @@ public class Sequence{
             colors.get(index).play(volume);
             this.wait(timespan);
         }
-    }
-
-    /**
-     * Checks is the number in sequence (according to the index) 
-     * is iqual to the number of the button pushed.
-     * @param button number of the button pushed
-     * @return false if the players pushed the wrong button and 
-     * true if he got the right one (same as sequence).
-     */
-    public boolean equals(int button){
-        return this.getFromIndex() == button;
-    }
-
-    /**
-     * Generates the new int to be added in the sequnce.
-     * @return a random number between the range limit.
-     */
-    private int nextInt(){
-        return this.random.nextInt(this.rangeLimit);
     }
 
     /**

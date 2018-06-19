@@ -37,29 +37,25 @@ public class Match{
      * Make a new round of the game.
      */
     public void nextRound(){
-        this.sequence.resetIndex();
-        this.sequence.push();
-        this.play();
+	    this.view.showNewSequence(this.sequence.getSequence());
+	    this.addPoints(this.difficulty);
+	    this.view.updatePoints();
     }
 
-    /**
-     * Checks if the button pushed is equal to the one in the sequence
-     * (checks if the player movement is right).
-     * @param button pushed by the player in his move
-     * @return false if his play was wrong anda true if it was right.
-     */
+
     public boolean check(int button){
-        if(!this.sequence.equals(button))
-            return false;
-
-        this.sequence.incIndex();
-        return true;
+    	if(this.sequence.checkTry(button)){
+    	    if(this.sequence.getIndex() == 0){
+    	    	this.nextRound();
+    	    }
+    	}else
+    	     this.gameOver()
     }
 
-    //acho que isso vai no controller
-    //public void gameOver(){
-        // ?
-    //}
+    public void gameOver(){
+    	//atualiza o ranking
+    	this.view.showRanking();
+    }
 
     /**
      * Play the match.
