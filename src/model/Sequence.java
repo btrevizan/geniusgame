@@ -18,7 +18,6 @@ public class Sequence{
     public Sequence(int rangeLimit){
         this.sequence = new ArrayList<Integer>();
         this.rangeLimit = rangeLimit;
-        this.random = new Random();
 
         this.resetIndex();
     }
@@ -28,15 +27,19 @@ public class Sequence{
      * @return the sequence of plays.
      */
     public ArrayList<Integer> getSequence(){
-        return (ArrayList<Integer>)this.sequence.clone();
+        return new ArrayList<Integer>(this.sequence);
     }
 
     /**
      * Gets the index of in where the sequence is.
      * @return the number on the index of sequence
      */
-    public int getFromIndex(){
-        return this.sequence.get(this.index);
+    public int getNextElement(){
+        return this.sequence.get(this.getIndex());
+    }
+    
+    private int getIndex(){
+    	return this.index;
     }
 
     /**
@@ -56,15 +59,23 @@ public class Sequence{
     /**
      * Pushes a new number to teh sequence adding a new play to the game.
      */
-    public void push(){
-        int next = this.nextInt();
-        this.sequence.add(next);
+    public void push(Integer n){
+        this.sequence.add(n);
+    }
+    
+    public void pushRandom(){
+    	Random rand = new Random();
+    	Integer i = rand.nextInt(this.getRangeLimit());
+    	this.push(i);
     }
 
-
+    private int getRangeLimit(){
+    	return this.rangeLimit;
+    }
+    
     public boolean checkTry(Interger theTry){
     	//aqui tem que mudar a comparação
-        isEqual =  this.getFromIndex();
+        isEqual =  theTry.equals(this.getNextElement());
         
         if(isEqual){
         	this.sequence.incIndex();
@@ -75,14 +86,6 @@ public class Sequence{
         	return true;        	
         }
         return false;
-    }
-
-    /**
-     * Generates the new int to be added in the sequnce.
-     * @return a random number between the range limit.
-     */
-    private int nextInt(){
-        return this.random.nextInt(this.rangeLimit);
     }
     
     /**
