@@ -28,6 +28,12 @@ public class Ranking implements Cloneable, IFileBased{
         this.load();
     }
 
+    /**
+     * Based on the points of a player this method decides if the player appears on the rank
+     * and if so the player is added to the rank in its rightful place.
+     * @param player that has just finished his game
+     * @return true if the player gets in the rank list by his points or false if he doesn't.
+     */
     public boolean push(Player player){
         int lastIndex = this.getLastIndex();
 
@@ -48,10 +54,18 @@ public class Ranking implements Cloneable, IFileBased{
         return true;
     }
 
+    /**
+     * Sets the rank.
+     * @param rank list of players that have already played and are at the top 10.
+     */
     public void setRank(ArrayList<Player> rank){
         this.rank = (ArrayList<Player>)rank;
     }
 
+    /**
+     * Get rank.
+     * @return iterator of the player that the rank is getting.
+     */
     public Iterator getRank(){
         final Iterator<Player> rank = this.rank.iterator();
 
@@ -71,24 +85,40 @@ public class Ranking implements Cloneable, IFileBased{
         };
     }
 
+    /**
+     * Gets size of the list of players that compose the rank.
+     * @return number of players at the rank list.
+     */
     private int getLastIndex(){
         return this.rank.size() - 1;
     }
 
+    /**
+     * Removes the last player of the rank.
+     */
     private void pop(){
         final int lastIndex = this.getLastIndex();
         this.rank.remove(lastIndex);
     }
 
+    /**
+     * Sorts the rank according to the player points.
+     */
     private void sort(){
         Collections.sort(this.rank, new PointComparator());
     }
 
+    /**
+     * Loads a new file to save rank list.
+     */
     public void load(){
         AssetFile file = new AssetFile(this.RANKPATH);
         this.setRank((ArrayList<Player>)file.load(Player.class));
     }
 
+    /**
+     * Saves rank on a file.
+     */
     public void save(){
         AssetFile file = new AssetFile(this.RANKPATH);
         file.save(this.rank);
