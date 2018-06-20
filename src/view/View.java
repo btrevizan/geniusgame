@@ -76,7 +76,7 @@ public class View {
     }
 
     /**
-     * Shows the person the main menu.
+     * Shows the player the game ranking.
      */
     public void showRanking() {
         try {

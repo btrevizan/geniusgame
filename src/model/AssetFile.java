@@ -22,6 +22,11 @@ public class AssetFile{
         return this.path;
     }
 
+    /**
+     * Changes game difficullty to diff.
+     * @param cls class
+     * @return list of colors related to their sounds.
+     */
     public List load(Class cls){
         ArrayList<Object> result = new ArrayList<Object>();
         Path filepath = Paths.get(this.path);
@@ -58,6 +63,10 @@ public class AssetFile{
         }
     }
 
+    /**
+     * Saves data on a file to be used by the game.
+     * @param data
+     */
     public void save(List data){
         try{
             PrintWriter file = new PrintWriter(this.path);

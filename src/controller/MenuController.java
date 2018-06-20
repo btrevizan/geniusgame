@@ -25,7 +25,7 @@ public class MenuController {
     private void handleNewGameButton() {
         //um popup ou algo assim pedindo o nome do jogador
             //getNamePlayer()
-        this.game.newMatch();
+        //this.game.newMatch();
         //ou isso ou ir pro newGameController
         this.view.showArena();
     }

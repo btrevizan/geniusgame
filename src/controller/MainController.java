@@ -49,7 +49,7 @@ public class MainController extends Application{
     public void showMenu() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainController.class.getResource("/Menu.fxml"));
+            loader.setLocation(MainController.class.getResource("../view/Menu.fxml"));
             AnchorPane menu = (AnchorPane) loader.load();
 
             rootLayout.setCenter(menu);
