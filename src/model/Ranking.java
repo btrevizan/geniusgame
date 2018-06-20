@@ -21,7 +21,7 @@ public class Ranking implements Cloneable, IFileBased{
     }
 
     private ArrayList<Player> rank;
-    private final String RANKPATH = "../assets/rank.txt";
+    private final String RANKPATH = "assets/rank.txt";
 
     public Ranking(){
         this.rank = new ArrayList<Player>();

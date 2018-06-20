@@ -48,7 +48,7 @@ public class AssetFile{
                 } catch(IllegalAccessException e){
                     System.err.format("IllegalAccess: %s%n", e);
                 } catch(InvocationTargetException e){
-                    System.err.format("InvocationTarget: %s%n", e);
+                    System.err.format("InvocationTarget for createInstance in %s%n", cls);
                 }
 
                 line = file.readLine();
@@ -66,8 +66,9 @@ public class AssetFile{
     /**
      * Saves data on a file to be used by the game.
      * @param data
+     * @return True, if saved the data correctly. False, otherwise.
      */
-    public void save(List data){
+    public boolean save(List data){
         try{
             PrintWriter file = new PrintWriter(this.path);
 
@@ -76,9 +77,10 @@ public class AssetFile{
             }
 
             file.close();
-
+            return true;
         } catch(FileNotFoundException e) {
             System.err.format("FileNotFound: %s%n", e);
+            return false;
         }
     }
 }

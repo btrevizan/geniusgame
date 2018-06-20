@@ -15,7 +15,7 @@ public class Configuration implements IFileBased{
     private IntegerProperty difficulty;
     private ObjectProperty<ArrayList<SoundedColor>> colors;
 
-    private static final String CONFIGPATH = "/assets/sounded_color.txt";
+    private static final String CONFIGPATH = "assets/sounded_color.txt";
 
     public Configuration(){
         this.volume = new SimpleDoubleProperty(Default.VOLUME);
@@ -102,7 +102,7 @@ public class Configuration implements IFileBased{
      * Loads file that has all colores related to their sounds
      */
     public void load(){
-        AssetFile file = new AssetFile(this.CONFIGPATH);
+        AssetFile file = new AssetFile(Configuration.CONFIGPATH);
 
         ArrayList<SoundedColor> colors = (ArrayList<SoundedColor>)file.load(SoundedColor.class);
         this.colors.set(colors);
@@ -112,7 +112,7 @@ public class Configuration implements IFileBased{
      * Saves file to store colored buttons settings.
      */
     public void save(){
-        AssetFile file = new AssetFile(this.CONFIGPATH);
+        AssetFile file = new AssetFile(Configuration.CONFIGPATH);
         file.save(this.getColors());
     }
 }

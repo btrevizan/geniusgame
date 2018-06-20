@@ -1,13 +1,12 @@
 package model;
 
 import java.awt.Color;
-import javafx.scene.media.AudioClip;
 
 
 public class SoundedColor implements IInstanceFileBased{
 
     public Color color;
-    public AudioClip sound;
+    public Sound sound;
 
     public SoundedColor(Color color, String soundURI){
         this.setColor(color);
@@ -47,7 +46,7 @@ public class SoundedColor implements IInstanceFileBased{
      * Gets sound.
      * @return sound that is being used.
      */
-    public AudioClip getSound(){
+    public Sound getSound(){
         return this.sound;
     }
 
@@ -55,8 +54,8 @@ public class SoundedColor implements IInstanceFileBased{
      * Sets sound creating a new audio clip based on a string os colors and sound.
      * @param soundURI string of color os rgb and the sound related to that color
      */
-    public void setSound(String soundURI){
-        this.sound = new AudioClip(soundURI);
+    public void setSound(String soundURI) {
+        this.sound = new Sound(soundURI);
     }
 
     /**
@@ -70,7 +69,9 @@ public class SoundedColor implements IInstanceFileBased{
         int blue = Integer.parseInt(args[2]);
         String soundURI = args[3];
 
-        return new SoundedColor(red, green, blue, soundURI);
+        Color color = new Color(red, green, blue);
+        SoundedColor result = new SoundedColor(color, soundURI);
+        return result;
     }
 
     /**
@@ -81,7 +82,7 @@ public class SoundedColor implements IInstanceFileBased{
         String red = Integer.toString(this.color.getRed());
         String green = Integer.toString(this.color.getGreen());
         String blue = Integer.toString(this.color.getBlue());
-        String soundURI = this.sound.getSource();
+        String soundURI = this.sound.getSoundURI();
 
         String result;
 
