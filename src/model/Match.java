@@ -9,13 +9,11 @@ public class Match{
     private Game game;
     private Player player;
     private Sequence sequence;
-    private Configuration configuration;
     private View view;
 
     public Match(Game game, Player player, Configuration configuration){
         this.game = game;
         this.player = player;
-        this.configuration = configuration;
         this.view = new View();
 
         int colorsSize = this.game.getColors().size();
@@ -44,7 +42,7 @@ public class Match{
     public void nextRound(){
         //tem que mudar aqui os parametros de acordo com a view
 	    this.view.showSequence(this.sequence, this.game);
-	    this.player.addPoints(this.configuration.getDifficulty());
+	    this.player.addPoints(this.game.getDifficulty());
 	    this.view.updatePoints();
     }
 
@@ -65,7 +63,7 @@ public class Match{
      * End game.
      */
     public void gameOver(){
-    	//atualiza o ranking
+        this.game.getRanking().push(this.player);
     	this.view.showRanking();
     }
 
@@ -77,6 +75,6 @@ public class Match{
         int timespan = this.game.getDifficulty();
         ArrayList<SoundedColor> colors = this.game.getColors();
 
-        this.view.showSequence(this.sequence,this.game);
+        this.view.showSequence(this.sequence, this.game);
     }
 }

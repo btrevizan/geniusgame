@@ -8,9 +8,7 @@ public class Game{
     private Configuration configuration;
 
     public Game(){
-
         this.configuration = new Configuration();
-
     }
 
     /**
