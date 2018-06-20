@@ -1,24 +1,48 @@
 package view;
 
 
-
+import controller.MenuController;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Game;
-import model.SoundedColor;
 import model.Sequence;
+import model.SoundedColor;
 
-import javafx.scene.layout.BorderPane;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class View {
+public class View extends Application{
 
 
-    private BorderPane rootLayout;
+
     private Stage primaryStage;
+    private BorderPane rootLayout;
+    private MenuController menu;
+
+
+    //   @Override
+    public void start(Stage primaryStage) throws IOException {
+        this.setPrimaryStage(primaryStage);
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        this.primaryStage.setScene(new Scene(root));
+        this.primaryStage.setTitle("AddressApp");
+        this.primaryStage.show();
+    }
+    //ver p que que isso sereve se nao for nada tirar
+    /**
+     * Returns the main stage.
+     * @return the primary stage
+     */
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static void main(String[] args){ launch(args); }
 
     public void setPrimaryStage(Stage primaryStage){
             this.primaryStage = primaryStage;
