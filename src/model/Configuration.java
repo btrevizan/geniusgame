@@ -15,7 +15,7 @@ public class Configuration implements IFileBased{
     private IntegerProperty difficulty;
     private ObjectProperty<ArrayList<SoundedColor>> colors;
 
-    private final String CONFIGPATH = "../assets/sounded_colors.txt";
+    private static final String CONFIGPATH = "/assets/sounded_color.txt";
 
     public Configuration(){
         this.volume = new SimpleDoubleProperty(Default.VOLUME);

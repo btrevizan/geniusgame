@@ -18,7 +18,45 @@ public class View {
 
 
     private BorderPane rootLayout;
+    private Stage primaryStage;
 
+    public void setPrimaryStage(Stage primaryStage){
+            this.primaryStage = primaryStage;
+    }
+
+    /**
+     * Initializes the root layout.
+     */
+    public void initRootLayout() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(View.class.getResource("../view/Main.fxml"));
+            rootLayout = (BorderPane) loader.load();
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Shows the person the main menu.
+     */
+    public void showMenu(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(View.class.getResource("../view/Menu.fxml"));
+            AnchorPane menu = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(menu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Plays the actions to be reproduced avery time a colored button is pushed.
      * @param	volume is the volume in witch the sound of the button pushed will be played.
@@ -105,18 +143,4 @@ public class View {
         }
     }
 
-    /**
-     * Shows the person the main menu.
-     */
-    public void showMenu() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(View.class.getResource("/Menu.fxml"));
-            AnchorPane menu = (AnchorPane) loader.load();
-
-            rootLayout.setCenter(menu);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

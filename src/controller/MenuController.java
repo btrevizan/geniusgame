@@ -1,14 +1,18 @@
 package controller;
 
-import model.*;
+import controller.*;
+import model.Game;
 import view.View;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class MenuController {
+public class MenuController  {
 
     private Game game;
     //private Player player;
+    private RankingController ranking;
     private View view;
 
     @FXML Button newGameButton;
@@ -16,40 +20,42 @@ public class MenuController {
     @FXML Button settingButton;
     @FXML Button exitButton;
 
-    private MenuController(){
+    public MenuController(){
         this.game = new Game();
         //this.player = new Player();
+        this.ranking = new RankingController();
         this.view = new View();
     }
 
-    private void handleNewGameButton() {
+    private void handleNewGameButton(ActionEvent event) {
         //um popup ou algo assim pedindo o nome do jogador
             //getNamePlayer()
         //this.game.newMatch();
-        //ou isso ou ir pro newGameController
-        this.view.showArena();
+        //this.view.showArena();
+
     }
 
-    private void handleRankingButton() {
-        this.view.showRanking();
-        //ir pro rankingController;
+    private void handleRankingButton(ActionEvent event) {
+       this.view.showRanking();
+       //this.ranking.main();
     }
 
-    private void handleSettingsButton() {
+    private void handleSettingsButton(ActionEvent event) {
         this.view.showSettings();
         //ir pro settingsController
     }
 
 
-    private void handleExitButton() {
-
+    private void handleExitButton(ActionEvent event) {
+        //fechar o jogo
     }
 
+
     public void main(){
-        newGameButton.setOnAction((event) -> handleNewGameButton());
-        rankingButton.setOnAction((event) -> handleRankingButton());
-        settingButton.setOnAction((event) -> handleSettingsButton());
-        exitButton.setOnAction((event) -> handleExitButton());
+        newGameButton.setOnAction(this::handleNewGameButton);
+        rankingButton.setOnAction(this::handleRankingButton);
+        settingButton.setOnAction(this::handleSettingsButton);
+        exitButton.setOnAction(this::handleExitButton);
 
     }
 }
