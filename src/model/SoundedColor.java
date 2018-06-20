@@ -6,8 +6,8 @@ import javafx.scene.media.AudioClip;
 
 public class SoundedColor implements IInstanceFileBased{
 
-    private Color color;
-    private AudioClip sound;
+    public Color color;
+    public AudioClip sound;
 
     public SoundedColor(Color color, String soundURI){
         this.setColor(color);
@@ -57,16 +57,6 @@ public class SoundedColor implements IInstanceFileBased{
      */
     public void setSound(String soundURI){
         this.sound = new AudioClip(soundURI);
-    }
-
-    /**
-     * Plays the actions to be reproduced avery time a colored button is pushed.
-     * @param	volume is the volume in witch the sound of the button pushed will be played.
-     */
-    public void play(double volume){
-        this.color.brighter();
-        this.sound.play(volume);
-        this.color.darker();
     }
 
     /**

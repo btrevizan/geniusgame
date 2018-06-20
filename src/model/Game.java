@@ -8,11 +8,13 @@ public class Game{
     private Configuration configuration;
 
     public Game(){
+
         this.configuration = new Configuration();
+
     }
 
     public Match newMatch(String playerName){
-        return new Match(this, this.newPlayer(playerName));
+        return new Match(this, this.newPlayer(playerName), this.configuration);
     }
 
     public int getDifficulty(){

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import view.View;
 
 
 public class Match{
@@ -8,10 +9,14 @@ public class Match{
     private Game game;
     private Player player;
     private Sequence sequence;
+    private Configuration configuration;
+    private View view;
 
-    public Match(Game game, Player player){
+    public Match(Game game, Player player, Configuration configuration){
         this.game = game;
         this.player = player;
+        this.configuration = configuration;
+        this.view = new View();
 
         int colorsSize = this.game.getColors().size();
         this.sequence = new Sequence(colorsSize);
@@ -37,21 +42,28 @@ public class Match{
      * Make a new round of the game.
      */
     public void nextRound(){
-	    this.view.showNewSequence(this.sequence.getSequence());
-	    this.addPoints(this.difficulty);
+        //tem que mudar aqui os parametros de acordo com a view
+	    this.view.showSequence(this.sequence, this.game);
+	    this.player.addPoints(this.configuration.getDifficulty());
 	    this.view.updatePoints();
     }
 
-
-    public boolean check(int button){
+    /**
+     * Checks if the game continues based on the gamer play.
+     * @param button the button that was last pushed by the player.
+     */
+    public void check(int button){
     	if(this.sequence.checkTry(button)){
     	    if(this.sequence.getIndex() == 0){
     	    	this.nextRound();
     	    }
     	}else
-    	     this.gameOver()
+    	     this.gameOver();
     }
 
+    /**
+     * End game.
+     */
     public void gameOver(){
     	//atualiza o ranking
     	this.view.showRanking();
@@ -65,6 +77,6 @@ public class Match{
         int timespan = this.game.getDifficulty();
         ArrayList<SoundedColor> colors = this.game.getColors();
 
-        this.sequence.play(colors, volume, timespan);
+        this.view.showSequence(this.sequence,this.game);
     }
 }
