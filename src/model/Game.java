@@ -1,23 +1,29 @@
 package model;
 
-import java.util.ArrayList;
+import view.SoundedColor;
+import view.View;
+
+import java.util.List;
 
 
 public class Game{
 
     private Configuration configuration;
-
-    public Game(){
-        this.configuration = new Configuration();
+    private View view;
+    private Match match;
+    
+    public Game(View view){
+        this.setView(view);
+        this.configuration = new Configuration(view);
     }
 
     /**
      * Generates a new game match for a certain player.
-     * @param playerName name of the player who wil play;
+     * @param playerName name of the player who will play;
      * @return player match.
      */
-    public Match newMatch(String playerName){
-        return new Match(this, this.newPlayer(playerName), this.configuration);
+    public void newMatch(String playerName){
+        this.match = new Match(this, this.newPlayer(playerName), this.configuration, this.view);
     }
 
     /**
@@ -37,18 +43,10 @@ public class Game{
     }
 
     /**
-     * Gets game sound effects volume.
-     * @return game sound effects volume.
-     */
-    public double getVolume(){
-        return this.configuration.getVolume();
-    }
-
-    /**
      * Gets game colores of game buttons.
      * @return list os colors associated to a sound.
      */
-    public ArrayList<SoundedColor> getColors(){
+    public List<SoundedColor> getColors(){
         return this.configuration.getColors();
     }
 
@@ -94,6 +92,7 @@ public class Game{
      */
     private void changeDifficulty(int diff){
         this.configuration.setDifficulty(diff);
+        this.view.setTimeGap(diff);
     }
 
     /**
@@ -104,4 +103,15 @@ public class Game{
         return new Player(name);
     }
 
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public void playRound(Integer clickedButton) {
+        this.match.checkTry(clickedButton);
+    }
+
+    public void playFeedback(Integer clickedButton) {
+        this.view.playButton(clickedButton);
+    }
 }

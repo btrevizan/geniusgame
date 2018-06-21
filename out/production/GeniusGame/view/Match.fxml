@@ -32,14 +32,14 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Arc fill="#09569e" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="90.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
-                  <Arc fill="#c30d0d" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc id="top_left" fill="#09569e" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="90.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc id="top_right" fill="#c30d0d" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Arc fill="#d3ca17" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="180.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
-                  <Arc fill="#2fc30e" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="270.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc id="bottom_left" fill="#d3ca17" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="180.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc id="bottom_right" fill="#2fc30e" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="270.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
                </children>
             </HBox>
          </children>

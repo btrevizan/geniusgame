@@ -1,54 +1,39 @@
 package model;
 
-import java.util.ArrayList;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import view.SoundedColor;
+import view.View;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class Configuration implements IFileBased{
+public class Configuration implements IFileBased {
 
-    private DoubleProperty volume;
     private IntegerProperty difficulty;
-    private ObjectProperty<ArrayList<SoundedColor>> colors;
+    View view;
 
     private static final String CONFIGPATH = "assets/sounded_color.txt";
 
-    public Configuration(){
-        this.volume = new SimpleDoubleProperty(Default.VOLUME);
-        this.difficulty = new SimpleIntegerProperty(Default.DIFFICULTY);
+    public Configuration(View view){
+        this.view = view;
+        this.view.setVolume(Default.VOLUME);
+        this.setDifficulty(Default.DIFFICULTY);
 
         ArrayList<SoundedColor> colors = new ArrayList<SoundedColor>();
-        this.colors = new SimpleObjectProperty<ArrayList<SoundedColor>>(colors);
+        this.view.setColors(new ArrayList<SoundedColor>(colors));
 
-        this.load();
+        this.load(true);
     }
 
-    /**
-     * Gets difficulty.
-     * @return game difficulty.
-     */
-    public int getDifficulty(){
-        return this.difficulty.get();
-    }
-
-    /**
-     * Sets game difficulty.
-     * @param difficulty of the game.
-     */
-    public void setDifficulty(int difficulty){
-        this.difficulty.set(difficulty);
-    }
-
-    /**
-     * Gets game sound effects volume.
-     * @return volume of the game sound effects.
-     */
-    public double getVolume(){
-        return this.volume.get();
+    public void load(boolean b){
+        List<SoundedColor> l = new ArrayList<>();
+        l.add(new SoundedColor(0,0,255,"cow-moo2.wav")); // top-left
+        l.add(new SoundedColor(255,0,0,"chicken-3.wav")); // top-right
+        l.add(new SoundedColor(0,255,255,"duck-quack5.wav")); // bottom-left
+        l.add(new SoundedColor(0,255,0,"piano1.wav")); // bottom-right
+        this.view.setColors(l);
     }
 
     /**
@@ -56,26 +41,28 @@ public class Configuration implements IFileBased{
      * @param volume that game sound effects will be played.
      */
     public void setVolume(double volume){
-        if(volume < Default.MUTE && volume > Default.VOLUME_HIGH)
-            return;
-
-        this.volume.set(volume);
+        if(volume < Default.MUTE)
+            this.view.setVolume(Default.MUTE);
+        else if(volume > Default.VOLUME_HIGH)
+            this.view.setVolume(Default.VOLUME_HIGH);
+        else
+            this.view.setVolume(volume);
     }
 
     /**
      * Gets colors for colored buttons.
      * @return list of colored buttons.
      */
-    public ArrayList<SoundedColor> getColors(){
-        return this.colors.get();
+    public List<SoundedColor> getColors(){
+        return this.view.getColors();
     }
 
     /**
      * Sets game colored buttons.
      * @param colors list of game colored buttons.
      */
-    private void setColors(ArrayList<SoundedColor> colors){
-        this.colors.set(colors);
+    private void setColors(List<SoundedColor> colors){
+        this.view.setColors(colors);
     }
 
     /**
@@ -87,11 +74,11 @@ public class Configuration implements IFileBased{
 
     /**
      * Changes game colors of game buttons.
-     * @param index of witch colored button the methor is being called for.
-     * @param soundURI string with all colores ands sound from colored button.
+     * @param index of witch colored button the method is being called for.
+     * @param soundURI string with all sound from colored button.
      */
     public void changeColor(int index, String soundURI){
-        ArrayList<SoundedColor> colors = this.getColors();
+        List<SoundedColor> colors = this.getColors();
         colors.get(index).setSound(soundURI);
 
         this.setColors(colors);
@@ -99,13 +86,13 @@ public class Configuration implements IFileBased{
     }
 
     /**
-     * Loads file that has all colores related to their sounds
+     * Loads file that has all colors related to their sounds
      */
     public void load(){
         AssetFile file = new AssetFile(Configuration.CONFIGPATH);
 
-        ArrayList<SoundedColor> colors = (ArrayList<SoundedColor>)file.load(SoundedColor.class);
-        this.colors.set(colors);
+        List<SoundedColor> colors = (List<SoundedColor>)file.load(SoundedColor.class);
+        this.view.setColors(colors);
     }
 
     /**
@@ -114,5 +101,13 @@ public class Configuration implements IFileBased{
     public void save(){
         AssetFile file = new AssetFile(Configuration.CONFIGPATH);
         file.save(this.getColors());
+    }
+
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = new SimpleIntegerProperty(difficulty);
+    }
+
+    public Integer getDifficulty() {
+        return difficulty.get();
     }
 }

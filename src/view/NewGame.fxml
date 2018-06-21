@@ -19,15 +19,15 @@
                   <Font name="Helvetica Neue" size="38.0" />
                </font>
             </Text>
-            <TextField promptText="Your Name" />
+            <TextField id="tf_playerName" promptText="Your Name" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0" text="Go Back">
+                  <Button id="goBackButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0" text="Go Back">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="186.0" text="Play!">
+                  <Button id="playButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="186.0" text="Play!">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>

@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.lang.Thread;
 
 
 public class Sequence{
@@ -50,15 +49,20 @@ public class Sequence{
      * Resets index.
      */
     private void resetIndex(){
-        this.index = 0;
+        this.setIndex(0);
     }
 
     /**
-     * Increase index.
+     * Increase index by 1.
      */
     private void incIndex(){
-        this.index = this.index + 1;
+        this.setIndex(this.getIndex()+1);
     }
+
+    /**
+     * Sets index. Doesn't allows index value to be less than 0.
+     */
+    private void setIndex(int index) { this.index = index > 0? index : 0; }
 
     /**
      * Pushes a new number to the sequence adding a new play to the game.
@@ -84,21 +88,34 @@ public class Sequence{
     }
 
     /**
-     * Try if the player pushed de right button and if so it prepares the sequence to the new round
+     * Tests if the player pushed de right button and if so it prepares the sequence to the new round
      * @param theTry Interger that represents the button pushed by the player
-     * @return false if the player got the sequence wrong and true if the player got the sequence right
+     * @return false if the player got the sequence element pointed by index
+     * wrong and true otherwise
      */
     public boolean checkTry(Integer theTry){
-        Boolean isEqual =  theTry.equals(this.getNextElement());
+        boolean isEqual =  theTry.equals(this.getNextElement());
         
         if(isEqual){
         	this.incIndex();
         	if(this.index == this.sequence.size()){
-                this.pushRandom();
+                this.addNextElement();
                 this.resetIndex();
         	}        	
         	return true;        	
         }
         return false;
+    }
+
+    public void startUp() {
+        this.addNextElement();
+    }
+
+    /**
+     * Adds new element to the sequence.
+     * API :: if you want to change the logic behind adding the next element only, change this
+     */
+    private void addNextElement() {
+        this.pushRandom();
     }
 }

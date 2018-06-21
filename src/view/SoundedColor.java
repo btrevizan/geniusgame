@@ -1,12 +1,17 @@
-package model;
+package view;
 
-import java.awt.Color;
+import javafx.scene.media.AudioClip;
+import model.Default;
+import model.IInstanceFileBased;
+
+import java.awt.*;
+import java.io.File;
 
 
-public class SoundedColor implements IInstanceFileBased{
+public class SoundedColor implements IInstanceFileBased {
 
     public Color color;
-    public Sound sound;
+    public AudioClip sound;
 
     public SoundedColor(Color color, String soundURI){
         this.setColor(color);
@@ -46,16 +51,17 @@ public class SoundedColor implements IInstanceFileBased{
      * Gets sound.
      * @return sound that is being used.
      */
-    public Sound getSound(){
+    public AudioClip getSound(){
         return this.sound;
     }
 
     /**
      * Sets sound creating a new audio clip based on a string os colors and sound.
-     * @param soundURI string of color os rgb and the sound related to that color
+     * @param filename string of sound file name. By default it looks into the media folder
      */
-    public void setSound(String soundURI) {
-        this.sound = new Sound(soundURI);
+    public void setSound(String filename) {
+        this.sound = new AudioClip(new File("./media/" + filename).toURI().toString());
+
     }
 
     /**
@@ -63,7 +69,7 @@ public class SoundedColor implements IInstanceFileBased{
      * @param args a array of strings that represents the color in rgb.
      * @return a new sounded colored object.
      */
-    public static Object createInstance(String[] args){
+    public static SoundedColor createInstance(String[] args){
         int red = Integer.parseInt(args[0]);
         int green = Integer.parseInt(args[1]);
         int blue = Integer.parseInt(args[2]);
@@ -82,7 +88,7 @@ public class SoundedColor implements IInstanceFileBased{
         String red = Integer.toString(this.color.getRed());
         String green = Integer.toString(this.color.getGreen());
         String blue = Integer.toString(this.color.getBlue());
-        String soundURI = this.sound.getSoundURI();
+        String soundURI = this.sound.toString();
 
         String result;
 

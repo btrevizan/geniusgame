@@ -7,7 +7,7 @@ public class Default{
     public static final double VOLUME = 0.5;
     public static final double VOLUME_HIGH = 1;
 
-    public static final int DIFFICULTY = Difficulty.EASY;
+    public static final int DIFFICULTY = Difficulty.MEDIUM;
 
     public static final int RANK_SIZE = 10;
     public static final String SEPARATOR = ",";

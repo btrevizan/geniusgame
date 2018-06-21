@@ -1,7 +1,6 @@
 package model;
-
-import java.util.ArrayList;
 import view.View;
+
 
 
 public class Match{
@@ -11,13 +10,19 @@ public class Match{
     private Sequence sequence;
     private View view;
 
-    public Match(Game game, Player player, Configuration configuration){
+    public Match(Game game, Player player, Configuration configuration, View view){
         this.game = game;
         this.player = player;
-        this.view = new View();
+        this.setView(view);
 
-        int colorsSize = this.game.getColors().size();
-        this.sequence = new Sequence(colorsSize);
+        this.view.setTimeGap(game.getDifficulty());
+
+        int numberOfColoredButtons = this.game.getColors().size();
+        this.sequence = new Sequence(numberOfColoredButtons);
+
+        this.sequence.startUp();
+        this.view.showSequence(this.sequence.getSequence());
+        this.view.updatePoints();
     }
 
     /**
@@ -40,8 +45,7 @@ public class Match{
      * Make a new round of the game.
      */
     public void nextRound(){
-        //tem que mudar aqui os parametros de acordo com a view
-	    this.view.showSequence(this.sequence, this.game);
+	    this.view.showSequence(this.sequence.getSequence());
 	    this.player.addPoints(this.game.getDifficulty());
 	    this.view.updatePoints();
     }
@@ -50,31 +54,25 @@ public class Match{
      * Checks if the game continues based on the gamer play.
      * @param button the button that was last pushed by the player.
      */
-    public void check(int button){
+    public void checkTry(Integer button){
     	if(this.sequence.checkTry(button)){
     	    if(this.sequence.getIndex() == 0){
     	    	this.nextRound();
     	    }
     	}else
-    	     this.gameOver();
+    	     this.matchOver();
     }
 
     /**
      * End game.
      */
-    public void gameOver(){
+    public void matchOver(){
         this.game.getRanking().push(this.player);
     	this.view.showRanking();
     }
 
-    /**
-     * Play the match.
-     */
-    private void play(){
-        double volume = this.game.getVolume();
-        int timespan = this.game.getDifficulty();
-        ArrayList<SoundedColor> colors = this.game.getColors();
 
-        this.view.showSequence(this.sequence, this.game);
+    public void setView(View view) {
+        this.view = view;
     }
 }

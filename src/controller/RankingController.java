@@ -1,31 +1,28 @@
 package controller;
 
 
-import view.View;
-import controller.MenuController;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import model.Game;
 
 public class RankingController{
 
-    private View view;
-    private MenuController menu;
     @FXML Button goBackButton;
 
-    public RankingController(){
-        this.view = new View();
-        this.menu = new MenuController();
-    }
+    Game model;
+
+    RankingController(Game model){ this.setModel(model); }
 
     private void handleGoBackButton(ActionEvent event) {
-        this.view.showMenu();
-        this.menu.main();
+        ;
     }
 
     public void main(){
         goBackButton.setOnAction(this::handleGoBackButton);
     }
 
+    public void setModel(Game model) {
+        this.model = model;
+    }
 }
