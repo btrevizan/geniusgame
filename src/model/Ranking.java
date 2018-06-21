@@ -1,13 +1,8 @@
 package model;
 
-import java.io.*;
-import java.nio.file.*;
-import java.nio.charset.*;
-
-import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collections;
+import java.util.Comparator;
 
 
 public class Ranking implements Cloneable, IFileBased{
@@ -37,12 +32,14 @@ public class Ranking implements Cloneable, IFileBased{
     public boolean push(Player player){
         int lastIndex = this.getLastIndex();
 
-        if(this.rank.size() == Default.RANK_SIZE){
+        if(this.rank.size() >= Default.RANK_SIZE){
             final int playerPoints = player.getPoints();
             final int lastPlayerPoints = this.rank.get(lastIndex).getPoints();
 
             if (playerPoints < lastPlayerPoints)
                 return false;
+            else
+                this.removeLast();
         } else {
             lastIndex = this.rank.size();
         }
@@ -64,25 +61,10 @@ public class Ranking implements Cloneable, IFileBased{
 
     /**
      * Get rank.
-     * @return iterator of the player that the rank is getting.
+     * @return a copy of rank
      */
-    public Iterator getRank(){
-        final Iterator<Player> rank = this.rank.iterator();
-
-        return new Iterator<Player>(){
-
-            public boolean hasNext(){
-                return rank.hasNext();
-            }
-
-            public Player next(){
-                return rank.next();
-            }
-
-            public void remove(){
-                throw new UnsupportedOperationException();
-            }
-        };
+    public ArrayList<Player> getRank(){
+        return new ArrayList<Player>(this.rank);
     }
 
     /**
@@ -122,6 +104,11 @@ public class Ranking implements Cloneable, IFileBased{
     public void save(){
         AssetFile file = new AssetFile(this.RANKPATH);
         file.save(this.rank);
+    }
+
+    private void removeLast(){
+        int lastIndex = this.getLastIndex();
+        this.rank.remove(lastIndex);
     }
 
     @Override

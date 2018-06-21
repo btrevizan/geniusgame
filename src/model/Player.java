@@ -37,19 +37,35 @@ public class Player implements Cloneable, IInstanceFileBased{
     }
 
     /**
+     * Gets player name property.
+     * @return property of player name
+     */
+    public StringProperty getNameProperty(){
+        return this.name;
+    }
+
+    /**
      * Add points to the player.
      * @param x number of points to be added to the player.
      */
     public void addPoints(int x){
         this.points.add(x);
     }
-    
+
     /**
      * Gets the number of points to be added to the player.
      * @return numeber of points of player.
      */
     public int getPoints(){
         return this.points.get();
+    }
+
+    /**
+     * Gets player points property.
+     * @return property of player points
+     */
+    public IntegerProperty getPointsProperty(){
+        return this.points;
     }
 
     /**

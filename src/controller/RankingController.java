@@ -1,28 +1,42 @@
 package controller;
 
-
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import model.Game;
+import model.Player;
+
 
 public class RankingController{
 
-    @FXML Button goBackButton;
+    @FXML
+    public TableView<Player> rankingTable;
 
-    Game model;
+    @FXML
+    public TableColumn<Player, String> playerNameColumn;
 
-    RankingController(Game model){ this.setModel(model); }
+    @FXML
+    public TableColumn<Player, Integer> playerPointsColumn;
 
-    private void handleGoBackButton(ActionEvent event) {
-        ;
-    }
+    private Game model;
 
-    public void main(){
-        goBackButton.setOnAction(this::handleGoBackButton);
+    public RankingController(){ }
+
+    @FXML
+    public void initialize(){
+        this.playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+        this.playerPointsColumn.setCellValueFactory(cellData -> cellData.getValue().getPointsProperty().asObject());
     }
 
     public void setModel(Game model) {
         this.model = model;
+    }
+
+    public void setRankingTable(){
+        initialize();
+        ObservableList<Player> rank = FXCollections.observableArrayList(this.model.getRanking().getRank());
+        this.rankingTable.setItems(rank);
     }
 }

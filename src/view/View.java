@@ -25,8 +25,6 @@ import java.util.List;
 
 public class View extends Application{
 
-
-
     private Stage primaryStage;
     private BorderPane rootLayout;
 
@@ -39,8 +37,10 @@ public class View extends Application{
     private MenuController menuController = null;
     private MatchController matchController = null;
     private NewGameController newGameController = null;
-    private RankingController RankingController = null;
-    private SettingsController SettingsController = null;
+    private RankingController rankingController = null;
+    private SettingsController settingsController = null;
+
+    private Game game;
 
 
     //   @Override
@@ -49,14 +49,13 @@ public class View extends Application{
             this.primaryStage = primaryStage;
             // Load root layout from fxml file.
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../view/Main.fxml")));
-            Game game = new Game(this);
-            this.menuController = new MenuController(game);
-            this.matchController = new MatchController(game);
-            this.newGameController = new NewGameController(game);
-            /*
-            this.RankingController = new RankingController(game);
-            this.SettingsController = new SettingsController(game);
-            */
+            this.game = new Game(this);
+            this.menuController = new MenuController(this.game);
+            this.matchController = new MatchController(this.game);
+            this.newGameController = new NewGameController(this.game);
+
+            // this.settingsController = new SettingsController(this.game);
+
 
             // Show the scene containing the root layout.
             this.primaryStage.setScene(scene);
@@ -271,10 +270,16 @@ public class View extends Application{
      */
     public void showRanking() {
         try {
-            AnchorPane ranking = (AnchorPane) FXMLLoader.load(getClass().getResource("../view/Ranking.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Ranking.fxml"));
+            AnchorPane ranking = (AnchorPane) loader.load();
             Button b = (Button) ranking.lookup("#goBackButton");
             b.setOnAction(e -> this.showMenu());
             rootLayout.setCenter(ranking);
+
+            RankingController controller = loader.getController();
+            controller.setModel(this.game);
+            controller.setRankingTable();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
