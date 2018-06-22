@@ -24,16 +24,7 @@ public class Configuration implements IFileBased {
         ArrayList<SoundedColor> colors = new ArrayList<SoundedColor>();
         this.view.setColors(new ArrayList<SoundedColor>(colors));
 
-        this.load(true);
-    }
-
-    public void load(boolean b){
-        List<SoundedColor> l = new ArrayList<>();
-        l.add(new SoundedColor(0,0,255,"cow-moo2.wav")); // top-left
-        l.add(new SoundedColor(255,0,0,"chicken-3.wav")); // top-right
-        l.add(new SoundedColor(0,255,255,"duck-quack5.wav")); // bottom-left
-        l.add(new SoundedColor(0,255,0,"piano1.wav")); // bottom-right
-        this.view.setColors(l);
+        this.load();
     }
 
     /**

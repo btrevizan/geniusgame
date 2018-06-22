@@ -1,4 +1,4 @@
-255,0,0,media/chicken-3.wav
-0,255,0,media/cow-moo2.wav
-0,0,255,media/duck-quack5.wav
-100,100,50,media/owl-4.wav
+0.03529412,0.3372549,0.61960784,media/chicken-3.wav
+0.76470588,0.05098039,0.05098039,media/cow-moo2.wav
+0.82745098,0.79215686,0.09019608,media/duck-quack5.wav
+0.18431373,0.76470588,0.05490196,media/owl-4.wav

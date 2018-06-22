@@ -5,6 +5,8 @@ import model.Game;
 
 public class NewGameController extends ControllerTemplate{
 
+    private String playerName;
+
     public NewGameController(Game game){
         this.setGame(game);
     }
@@ -13,8 +15,12 @@ public class NewGameController extends ControllerTemplate{
 
     }
 
-    public void handlePlayButton(ActionEvent e, String playername){
-        this.game.newMatch(playername);
+    public void handlePlayButton(ActionEvent e, String playerName){
+        this.playerName = playerName;
+    }
+
+    public String getPlayerName(){
+        return this.playerName;
     }
 
 }

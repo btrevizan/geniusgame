@@ -35,7 +35,6 @@ public class RankingController{
     }
 
     public void setRankingTable(){
-        initialize();
         ObservableList<Player> rank = FXCollections.observableArrayList(this.model.getRanking().getRank());
         this.rankingTable.setItems(rank);
     }

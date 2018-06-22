@@ -10,7 +10,7 @@ public class Match{
     private Sequence sequence;
     private View view;
 
-    public Match(Game game, Player player, Configuration configuration, View view){
+    public Match(Game game, Player player, View view){
         this.game = game;
         this.player = player;
         this.setView(view);
@@ -22,7 +22,6 @@ public class Match{
 
         this.sequence.startUp();
         this.view.showSequence(this.sequence.getSequence());
-        this.view.updatePoints();
     }
 
     /**
@@ -46,8 +45,12 @@ public class Match{
      */
     public void nextRound(){
 	    this.view.showSequence(this.sequence.getSequence());
-	    this.player.addPoints(this.game.getDifficulty());
+	    this.player.addPoints(this.getDifficultyPoints());
 	    this.view.updatePoints();
+    }
+
+    private int getDifficultyPoints(){
+        return (int) Math.ceil((Difficulty.HARD / (double) this.game.getDifficulty()) * 5);
     }
 
     /**
@@ -74,5 +77,9 @@ public class Match{
 
     public void setView(View view) {
         this.view = view;
+    }
+
+    public void playFeedback(Integer clickedButton) {
+        this.view.playButton(clickedButton);
     }
 }

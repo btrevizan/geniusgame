@@ -37,7 +37,6 @@ public class View extends Application{
     private MenuController menuController = null;
     private MatchController matchController = null;
     private NewGameController newGameController = null;
-    private RankingController rankingController = null;
     private SettingsController settingsController = null;
 
     private Game game;
@@ -51,10 +50,8 @@ public class View extends Application{
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../view/Main.fxml")));
             this.game = new Game(this);
             this.menuController = new MenuController(this.game);
-            this.matchController = new MatchController(this.game);
             this.newGameController = new NewGameController(this.game);
-
-            // this.settingsController = new SettingsController(this.game);
+            this.settingsController = new SettingsController();
 
 
             // Show the scene containing the root layout.
@@ -140,8 +137,15 @@ public class View extends Application{
      */
     public void showMatch(){
         try {
-            AnchorPane match = (AnchorPane) FXMLLoader.load(getClass().getResource("../view/Match.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Match.fxml"));
+            AnchorPane match = (AnchorPane) loader.load();
             rootLayout.setCenter(match);
+
+            this.matchController = loader.getController();
+            matchController.setMatch(this.game.newMatch(this.newGameController.getPlayerName()));
+            matchController.setPlayerName();
+            this.updatePoints();
+
             Arc arc = (Arc) match.lookup("#top_left");
             arc.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     me -> matchController.handleTopLeft(this.getIgnoreStatus())
@@ -158,6 +162,7 @@ public class View extends Application{
             arc.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     me -> matchController.handleBottomRight(this.getIgnoreStatus())
             );
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -170,13 +175,13 @@ public class View extends Application{
             Button b = (Button) newGameScreen.lookup("#goBackButton");
             b.setOnAction(e -> {
                 this.showMenu();
-                newGameController.handleGoBackButton(e);
+                this.newGameController.handleGoBackButton(e);
             });
             b = (Button) newGameScreen.lookup("#playButton");
             TextField s = (TextField) newGameScreen.lookup("#tf_playerName");
             b.setOnAction(e -> {
+                this.newGameController.handlePlayButton(e, s.getText());
                 this.showMatch();
-                newGameController.handlePlayButton(e, s.getText());
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -190,9 +195,9 @@ public class View extends Application{
      */
     public void playButton(Integer clickedButton){
         SoundedColor soundedColor = this.colors.get(clickedButton);
-        soundedColor.color.brighter();
+        this.matchController.setColorBrighter(clickedButton, soundedColor);
         soundedColor.sound.play(volume.get());
-        soundedColor.color.darker();
+        this.matchController.setColorDarker(clickedButton, soundedColor);
         this.waitTime();
     }
 
@@ -216,8 +221,8 @@ public class View extends Application{
         this.waitTime(timespan.get());
     }
 
-    //ver como fazer isso
     public void updatePoints() {
+        this.matchController.setScore();
     }
 
     /**

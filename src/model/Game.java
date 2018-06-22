@@ -10,7 +10,6 @@ public class Game{
 
     private Configuration configuration;
     private View view;
-    private Match match;
     
     public Game(View view){
         this.setView(view);
@@ -22,8 +21,8 @@ public class Game{
      * @param playerName name of the player who will play;
      * @return player match.
      */
-    public void newMatch(String playerName){
-        this.match = new Match(this, this.newPlayer(playerName), this.configuration, this.view);
+    public Match newMatch(String playerName){
+        return new Match(this, this.newPlayer(playerName), this.view);
     }
 
     /**
@@ -105,13 +104,5 @@ public class Game{
 
     public void setView(View view) {
         this.view = view;
-    }
-
-    public void playRound(Integer clickedButton) {
-        this.match.checkTry(clickedButton);
-    }
-
-    public void playFeedback(Integer clickedButton) {
-        this.view.playButton(clickedButton);
     }
 }

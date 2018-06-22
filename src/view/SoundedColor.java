@@ -4,7 +4,7 @@ import javafx.scene.media.AudioClip;
 import model.Default;
 import model.IInstanceFileBased;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 import java.io.File;
 
 
@@ -18,18 +18,8 @@ public class SoundedColor implements IInstanceFileBased {
         this.setSound(soundURI);
     }
 
-    public SoundedColor(int r, int g, int b, String soundURI){
-        this(new Color(r, g, b), soundURI);
-    }
-
-    /**
-     * Creates a new color based on the parameters.
-     * @param r interger that represents red in the making of the color
-     * @param g interger that represents green in the making of the color
-     * @param b interger that represents blue in the making of the color
-     */
-    public void setColor(int r, int g, int b){
-        this.color = new Color(r, g, b);
+    public SoundedColor(float r, float g, float b, String soundURI){
+        this(new Color(r, g, b, 1.0), soundURI);
     }
 
     /**
@@ -37,6 +27,14 @@ public class SoundedColor implements IInstanceFileBased {
      */
     public void setColor(Color color){
         this.color = color;
+    }
+
+    public Color brighter(){
+        return this.color.brighter();
+    }
+
+    public Color darker(){
+        return this.color.darker();
     }
 
     /**
@@ -60,7 +58,7 @@ public class SoundedColor implements IInstanceFileBased {
      * @param filename string of sound file name. By default it looks into the media folder
      */
     public void setSound(String filename) {
-        this.sound = new AudioClip(new File("./media/" + filename).toURI().toString());
+        this.sound = new AudioClip(new File(filename).toURI().toString());
 
     }
 
@@ -70,14 +68,20 @@ public class SoundedColor implements IInstanceFileBased {
      * @return a new sounded colored object.
      */
     public static SoundedColor createInstance(String[] args){
-        int red = Integer.parseInt(args[0]);
-        int green = Integer.parseInt(args[1]);
-        int blue = Integer.parseInt(args[2]);
-        String soundURI = args[3];
+        try {
+            float red = Float.parseFloat(args[0]);
+            float green = Float.parseFloat(args[1]);
+            float blue = Float.parseFloat(args[2]);
+            String soundURI = args[3];
 
-        Color color = new Color(red, green, blue);
-        SoundedColor result = new SoundedColor(color, soundURI);
-        return result;
+            Color color = new Color(red, green, blue, 1.0);
+            SoundedColor result = new SoundedColor(color, soundURI);
+            return result;
+        } catch (Exception e){
+            System.err.println(e);
+        }
+
+        return null;
     }
 
     /**
@@ -85,9 +89,9 @@ public class SoundedColor implements IInstanceFileBased {
      * @return a string containig the strings os the colors and the sound related to them.
      */
     public String toString(){
-        String red = Integer.toString(this.color.getRed());
-        String green = Integer.toString(this.color.getGreen());
-        String blue = Integer.toString(this.color.getBlue());
+        String red = Double.toString(this.color.getRed());
+        String green = Double.toString(this.color.getGreen());
+        String blue = Double.toString(this.color.getBlue());
         String soundURI = this.sound.toString();
 
         String result;

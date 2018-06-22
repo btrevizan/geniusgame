@@ -9,22 +9,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MatchController">
    <children>
       <HBox layoutX="17.0" layoutY="35.0" prefHeight="57.0" prefWidth="600.0" spacing="30.0" AnchorPane.bottomAnchor="343.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <HBox prefHeight="29.0" prefWidth="305.0" spacing="30.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player name" textAlignment="CENTER">
+                  <Text fx:id="playerName" strokeType="OUTSIDE" strokeWidth="0.0" text="Player name" textAlignment="CENTER">
                      <font>
                         <Font name="Helvetica Neue" size="16.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Level: 01" textAlignment="CENTER" wrappingWidth="64.31999206542969">
-                     <font>
-                        <Font name="Helvetica Neue" size="16.0" />
-                     </font>
-                  </Text>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="CENTER" wrappingWidth="64.31999206542969">
+                           <font>
+                              <Font name="Helvetica Neue" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="score" layoutX="10.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="38.31999206542969">
+                           <font>
+                              <Font name="Helvetica Neue" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
                </children>
                <HBox.margin>
                   <Insets left="10.0" top="8.0" />
@@ -50,14 +59,14 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Arc id="top_left" fill="#09569e" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="90.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
-                  <Arc id="top_right" fill="#c30d0d" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc id="top_left" fx:id="blueArc" fill="#09569e" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="90.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc id="top_right" fx:id="redArc" fill="#c30d0d" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Arc id="bottom_left" fill="#d3ca17" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="180.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
-                  <Arc id="bottom_right" fill="#2fc30e" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="270.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc id="bottom_left" fx:id="yellowArc" fill="#d3ca17" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="180.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                  <Arc id="bottom_right" fx:id="greenArc" fill="#2fc30e" layoutX="110.0" layoutY="110.0" length="90.0" radiusX="130.0" radiusY="130.0" startAngle="270.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
                </children>
             </HBox>
          </children>

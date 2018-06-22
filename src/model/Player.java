@@ -49,7 +49,12 @@ public class Player implements Cloneable, IInstanceFileBased{
      * @param x number of points to be added to the player.
      */
     public void addPoints(int x){
-        this.points.add(x);
+        int points = this.getPoints();
+        this.setPoints(points + x);
+    }
+
+    private void setPoints(int points){
+        this.points.set(points);
     }
 
     /**
