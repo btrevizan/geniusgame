@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
 import model.Game;
+import model.Match;
 
 import java.io.File;
 import java.io.IOException;
@@ -142,31 +143,44 @@ public class View extends Application{
             rootLayout.setCenter(match);
 
             this.matchController = loader.getController();
-            matchController.setMatch(this.game.newMatch(this.newGameController.getPlayerName()));
+            Match matchObj = this.game.newMatch(this.newGameController.getPlayerName());
+            matchController.setMatch(matchObj);
             matchController.setPlayerName();
             this.updatePoints();
 
-            Button endB = (Button) match.lookup("#endGame");
-            endB.setOnAction(e ->  this.showMenu());
-            Button b = (Button) match.lookup("#settings");
-            b.setOnAction(e ->  this.showSettings());
+            Arc bluearc = (Arc) match.lookup("#top_left");
+            Arc redarc = (Arc) match.lookup("#top_right");
+            Arc yellowarc = (Arc) match.lookup("#bottom_left");
+            Arc greenarc = (Arc) match.lookup("#bottom_right");
 
-            Arc arc = (Arc) match.lookup("#top_left");
-            arc.addEventHandler(MouseEvent.MOUSE_PRESSED,
+            matchController.setBlueArc(bluearc);
+            matchController.setRedArc(redarc);
+            matchController.setYellowArc(yellowarc);
+            matchController.setGreenArc(greenarc);
+            matchController.setArcs();
+
+            bluearc.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     me -> matchController.handleTopLeft(this.getIgnoreStatus())
             );
-            arc = (Arc) match.lookup("#top_right");
-            arc.addEventHandler(MouseEvent.MOUSE_PRESSED,
+
+            redarc.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     me -> matchController.handleTopRight(this.getIgnoreStatus())
             );
-            arc = (Arc) match.lookup("#bottom_left");
-            arc.addEventHandler(MouseEvent.MOUSE_PRESSED,
+
+            yellowarc.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     me -> matchController.handleBottomLeft(this.getIgnoreStatus())
             );
-            arc = (Arc) match.lookup("#bottom_right");
-            arc.addEventHandler(MouseEvent.MOUSE_PRESSED,
+
+            greenarc.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     me -> matchController.handleBottomRight(this.getIgnoreStatus())
             );
+
+            //Button endB = (Button) match.lookup("#endGame");
+            //endB.setOnAction(e ->  this.showMenu());
+            //Button b = (Button) match.lookup("#settings");
+            //b.setOnAction(e ->  this.showSettings());
+
+            this.showSequence(matchObj.getSequence().getSequence());
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -21,7 +21,6 @@ public class Match{
         this.sequence = new Sequence(numberOfColoredButtons);
 
         this.sequence.startUp();
-        this.view.showSequence(this.sequence.getSequence());
     }
 
     /**
@@ -51,6 +50,10 @@ public class Match{
 
     private int getDifficultyPoints(){
         return (int) Math.ceil((Difficulty.HARD / (double) this.game.getDifficulty()) * 5);
+    }
+
+    public Sequence getSequence(){
+        return this.sequence;
     }
 
     /**

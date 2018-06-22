@@ -10,16 +10,9 @@ import java.util.ArrayList;
 
 public class MatchController extends ControllerTemplate{
 
-    @FXML
     public Arc blueArc;
-
-    @FXML
     public Arc redArc;
-
-    @FXML
     public Arc greenArc;
-
-    @FXML
     public Arc yellowArc;
 
     @FXML
@@ -33,10 +26,6 @@ public class MatchController extends ControllerTemplate{
 
     public MatchController(){
         this.coloredButtons = new ArrayList<>();
-        this.coloredButtons.add(blueArc);
-        this.coloredButtons.add(redArc);
-        this.coloredButtons.add(yellowArc);
-        this.coloredButtons.add(greenArc);
     }
 
     @FXML
@@ -54,6 +43,29 @@ public class MatchController extends ControllerTemplate{
         this.score.setText(Integer.toString(this.match.getPlayerPoints()));
     }
 
+    public void setArcs(){
+        this.coloredButtons.add(this.blueArc);
+        this.coloredButtons.add(this.redArc);
+        this.coloredButtons.add(this.yellowArc);
+        this.coloredButtons.add(this.greenArc);
+    }
+
+    public void setBlueArc(Arc arc){
+        this.blueArc = arc;
+    }
+
+    public void setRedArc(Arc arc){
+        this.redArc = arc;
+    }
+
+    public void setYellowArc(Arc arc){
+        this.yellowArc = arc;
+    }
+
+    public void setGreenArc(Arc arc){
+        this.greenArc = arc;
+    }
+
     public void setColorBrighter(int index, SoundedColor soundedColor){
         Arc arc = this.coloredButtons.get(index);
         arc.setFill(soundedColor.brighter());
@@ -61,7 +73,7 @@ public class MatchController extends ControllerTemplate{
 
     public void setColorDarker(int index, SoundedColor soundedColor){
         Arc arc = this.coloredButtons.get(index);
-        arc.setFill(soundedColor.darker());
+        arc.setFill(soundedColor.getColor());
     }
 
     public void handleTopLeft(boolean b) {
