@@ -53,8 +53,7 @@ public class View extends Application{
             this.menuController = new MenuController(this.game);
             this.matchController = new MatchController(this.game);
             this.newGameController = new NewGameController(this.game);
-
-            // this.settingsController = new SettingsController(this.game);
+            this.settingsController = new SettingsController(this.game);
 
 
             // Show the scene containing the root layout.
@@ -142,6 +141,12 @@ public class View extends Application{
         try {
             AnchorPane match = (AnchorPane) FXMLLoader.load(getClass().getResource("../view/Match.fxml"));
             rootLayout.setCenter(match);
+
+            Button endB = (Button) match.lookup("#endGame");
+            endB.setOnAction(e ->  this.showMenu());
+            Button b = (Button) match.lookup("#settings");
+            b.setOnAction(e ->  this.showSettings());
+
             Arc arc = (Arc) match.lookup("#top_left");
             arc.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     me -> matchController.handleTopLeft(this.getIgnoreStatus())
@@ -186,7 +191,7 @@ public class View extends Application{
 
     /**
      * Plays the actions to be reproduced avery time a colored button is pushed.
-     * @param	volume is the volume in witch the sound of the button pushed will be played.
+     * @param	clickedButton is the volume in witch the sound of the button pushed will be played.
      */
     public void playButton(Integer clickedButton){
         SoundedColor soundedColor = this.colors.get(clickedButton);
@@ -243,9 +248,17 @@ public class View extends Application{
      */
     public void showSettings(){
         try {
-            AnchorPane menu = (AnchorPane) FXMLLoader.load(getClass().getResource("../view/Settings.fxml"));
-
+            AnchorPane settings = (AnchorPane) FXMLLoader.load(getClass().getResource("../view/Settings.fxml"));
+            rootLayout.setCenter(settings);
             List<String> list_of_files = new ArrayList<String>();
+
+            Button b = (Button) settings.lookup("#okButton");
+            b.setOnAction(e ->  this.showMenu());
+
+            Button muteB = (Button) settings.lookup("#muteButton");
+            muteB.setOnAction(e ->{
+                settingsController.handleMuteButton(e);
+            });
 
             File[] files = new File("./media/").listFiles();
             //If this pathname does not denote a directory, then listFiles() returns null.
@@ -258,7 +271,7 @@ public class View extends Application{
             System.out.println(list_of_files.toString()); // list_of_files tem uma lista de todos os arquivos de som, adiciona no dropdown daí como opção
             // pode ser o mesmo pra todos, não precisa testar se vai ter 2 iguais
 
-            rootLayout.setCenter(menu);
+            rootLayout.setCenter(settings);
         } catch (IOException e) {
             e.printStackTrace();
         }

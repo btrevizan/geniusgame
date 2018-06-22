@@ -20,7 +20,12 @@
                         <Font name="Helvetica Neue" size="16.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Level: 01" textAlignment="CENTER" wrappingWidth="64.31999206542969">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="CENTER" wrappingWidth="64.31999206542969">
+                     <font>
+                        <Font name="Helvetica Neue" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="score" layoutX="127.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="64.31999206542969">
                      <font>
                         <Font name="Helvetica Neue" size="16.0" />
                      </font>
@@ -32,12 +37,12 @@
             </HBox>
             <HBox prefHeight="37.0" prefWidth="370.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="200.0" text="I don't wanna play anymore">
+                  <Button fx:id="endGame" mnemonicParsing="false" prefHeight="37.0" prefWidth="141.0" text="End Game">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Settings">
+                  <Button fx:id="settings" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Settings">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
