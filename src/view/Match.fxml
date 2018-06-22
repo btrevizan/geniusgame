@@ -15,9 +15,7 @@
          <children>
             <HBox prefHeight="29.0" prefWidth="305.0" spacing="30.0">
                <children>
-<<<<<<< HEAD
                   <Text fx:id="playerName" strokeType="OUTSIDE" strokeWidth="0.0" text="Player name" textAlignment="CENTER">
-=======
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player name" textAlignment="CENTER">
                      <font>
                         <Font name="Helvetica Neue" size="16.0" />
@@ -29,7 +27,6 @@
                      </font>
                   </Text>
                   <Text fx:id="score" layoutX="127.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="64.31999206542969">
->>>>>>> e693bb5e6205792003ab9d7f1ef5163e0649e594
                      <font>
                         <Font name="Helvetica Neue" size="16.0" />
                      </font>
