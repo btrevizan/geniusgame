@@ -140,12 +140,14 @@ public class MatchController{
             final int button = i;
 
             arc.setOnMouseClicked(e -> {
-                this.playButton(button);
+                Timeline timeline = this.playButton(button);
 
-                if(!this.match.check(button))
-                    this.gameOver();
-                else
-                    this.match.addPoints();
+                timeline.setOnFinished(event -> {
+                    if(!this.match.check(button))
+                        this.gameOver();
+                    else
+                        this.match.addPoints();
+                });
             });
         }
     }
