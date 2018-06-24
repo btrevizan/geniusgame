@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.SettingsController">
+   <children>
+      <VBox layoutX="105.0" prefHeight="400.0" prefWidth="391.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" textAlignment="CENTER" wrappingWidth="500.3459930419922">
+               <font>
+                  <Font name="Helvetica Neue" size="38.0" />
+               </font>
+            </Text>
+            <HBox prefHeight="100.0" prefWidth="300.0">
+               <children>
+                  <VBox prefHeight="247.0" prefWidth="250.0" spacing="35.0">
+                     <children>
+                        <VBox prefHeight="85.0" prefWidth="140.0" spacing="8.0">
+                           <children>
+                              <Label text="Volume">
+                                 <font>
+                                    <Font name="Helvetica Neue" size="16.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                                 <children>
+                                    <Slider fx:id="volumeSlider" blockIncrement="0.05" majorTickUnit="0.1" max="1.0" maxHeight="1.7976931348623157E308" prefHeight="27.0" prefWidth="175.0" value="0.5" />
+                                    <Button fx:id="muteButton" mnemonicParsing="false" onMouseClicked="#mute" text="Mute" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                           <children>
+                              <Label text="Difficulty">
+                                 <font>
+                                    <Font name="Helvetica Neue" size="16.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="easyRadio" mnemonicParsing="false" onMouseClicked="#setDifficultyEasy" text="Easy">
+                                 <font>
+                                    <Font name="Helvetica Neue" size="13.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="difficulty" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="MediumRadio" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#setDifficultyMedium" selected="true" text="Medium" toggleGroup="$difficulty">
+                                 <font>
+                                    <Font name="Helvetica Neue" size="13.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="hardRadio" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#setDifficultyHard" text="Hard" toggleGroup="$difficulty">
+                                 <font>
+                                    <Font name="Helvetica Neue" size="13.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                        </VBox>
+                        <Button fx:id="okButton" mnemonicParsing="false" text="OK!">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="247.0" prefWidth="250.0" spacing="8.0">
+                     <children>
+                        <Label text="Sounds">
+                           <font>
+                              <Font name="Helvetica Neue" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <VBox prefHeight="100.0" prefWidth="55.0" spacing="15.0">
+                                 <children>
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="27.0" text="Blue">
+                                       <font>
+                                          <Font name="Helvetica Neue" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="27.0" text="Red" textAlignment="RIGHT">
+                                       <font>
+                                          <Font name="Helvetica Neue" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="37.0" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="27.0" text="Yellow">
+                                       <font>
+                                          <Font name="Helvetica Neue" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="64.0" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="27.0" text="Green">
+                                       <font>
+                                          <Font name="Helvetica Neue" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="195.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="180.0" spacing="15.0">
+                                 <children>
+                                    <ChoiceBox fx:id="blueAudioBox" prefHeight="27.0" prefWidth="208.0" />
+                                    <ChoiceBox fx:id="redAudioBox" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="208.0" />
+                                    <ChoiceBox fx:id="yellowAudioBox" layoutX="10.0" layoutY="37.0" prefHeight="27.0" prefWidth="208.0" />
+                                    <ChoiceBox fx:id="greenAudioBox" layoutX="10.0" layoutY="37.0" prefHeight="27.0" prefWidth="208.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

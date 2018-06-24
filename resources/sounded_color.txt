@@ -1,0 +1,4 @@
+resources/img/buttons/blue.jpg,resources/img/buttons/blue_light.jpg,chicken-3.wav
+resources/img/buttons/red.jpg,resources/img/buttons/red_light.jpg,cow-moo2.wav
+resources/img/buttons/yellow.jpg,resources/img/buttons/yellow_light.jpg,duck-quack5.wav
+resources/img/buttons/green.jpg,resources/img/buttons/green_light.jpg,owl-4.wav
